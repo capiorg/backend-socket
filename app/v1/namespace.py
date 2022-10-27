@@ -6,6 +6,7 @@ from dependency_injector.wiring import Provide
 from dependency_injector.wiring import inject
 
 from app.di.containers import Application
+from app.v1.models.on_typing import TypingSubModel
 from app.v1.security.auth import Security
 from app.v1.security.exceptions import BaseTokenError
 
@@ -43,13 +44,14 @@ class NameSpaceV1(socketio.AsyncNamespace):
         await self.disconnect(sid=sid)
 
     @inject
-    async def on_my_event(
+    async def on_typing(
         self,
         sid,
         data,
         arq_client: ArqRedis = Provide[Application.services.arq],
     ):
-        print(f"{arq_client=}")
-        print("ЯЙЦА))")
-        await self.emit("my_response", data)
-        await self.disconnect(sid=sid)
+        session = await self.get_session(sid)
+        user_uuid = session.get("uuid")
+
+        data_model = TypingSubModel.parse_obj(data)
+        await self.emit("typingResponse", {"author": "123"}, skip_sid=sid)
