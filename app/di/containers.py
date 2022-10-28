@@ -35,8 +35,7 @@ class Services(containers.DeclarativeContainer):
     )
     security = providers.Factory(
         Security,
-        jwt_secret=config.JWT_SECRET,
-        jwt_algorithm=config.JWT_ALGORITHM
+        base_url=config.AUTH,
     )
 
 

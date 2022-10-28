@@ -33,4 +33,13 @@ class SecuritySettings(BaseSettings):
         env_file_encoding = "utf-8"
 
 
+class ServicesSettings(BaseSettings):
+    AUTH: str = Field(env="API_AUTH")
+
+    class Config:
+        env_file = ".env"
+        env_file_encoding = "utf-8"
+
+
 redis_settings = RedisSettings()
+services_settings = ServicesSettings()

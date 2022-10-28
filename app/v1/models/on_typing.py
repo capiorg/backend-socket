@@ -1,6 +1,9 @@
+import datetime
 from uuid import UUID
 
 from pydantic import BaseModel
+
+from app.v1.security.models import SmallUserModel
 
 
 class TypingSubModel(BaseModel):
@@ -8,4 +11,8 @@ class TypingSubModel(BaseModel):
 
 
 class TypingPubModel(BaseModel):
-    pass
+    author: SmallUserModel
+    conversation_id: UUID
+    created_at: datetime.datetime
+
+
