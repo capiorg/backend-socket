@@ -4,7 +4,7 @@ from config import redis_settings
 
 mgr = socketio.AsyncRedisManager(
     redis_settings.dsn,
-    channel="sio123"
+    channel=redis_settings.REDIS_DB_QUEUE_CHANNEL,
 )
 sio = socketio.AsyncServer(
     client_manager=mgr,

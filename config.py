@@ -7,7 +7,10 @@ class RedisSettings(BaseSettings):
     REDIS_PORT: int = Field(env="REDIS_PORT", default=6379)
     REDIS_PWD: str = Field(env="REDIS_PWD", default="")
     REDIS_USER: str = Field(env="REDIS_USER", default="default")
-    REDIS_DATABASE: int = Field(env="REDIS_DB", default=3)
+    REDIS_DATABASE: int = Field(env="REDIS_DB", default=8)
+    REDIS_DB_QUEUE_CHANNEL: str = Field(
+        env="REDIS_DB_QUEUE_CHANNEL", default="socketio_channel_v1"
+    )
 
     @property
     def dsn(self):

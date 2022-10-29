@@ -14,8 +14,9 @@ def application():
     application_di.core.init_resources()
     application_di.wire(modules=[__name__])
 
+    app1 = socketio.ASGIApp(sio)
     sio.register_namespace(NameSpaceV1("/v1"))
-    return socketio.ASGIApp(sio)
+    return app1
 
 
 app = application()
