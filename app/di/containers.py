@@ -3,6 +3,7 @@ from dependency_injector import providers
 
 from app.di.redis import get_arq_redis
 from app.di.redis import get_redis_settings
+from app.services.core.client import BackendCoreClient
 from app.v1.security.auth import Security
 
 
@@ -36,6 +37,11 @@ class Services(containers.DeclarativeContainer):
     security = providers.Factory(
         Security,
         base_url=config.AUTH,
+    )
+
+    core = providers.Factory(
+        BackendCoreClient,
+        base_url=config.CORE,
     )
 
 

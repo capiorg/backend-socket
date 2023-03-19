@@ -38,6 +38,7 @@ class SecuritySettings(BaseSettings):
 
 class ServicesSettings(BaseSettings):
     AUTH: str = Field(env="API_AUTH")
+    CORE: str = Field(env="API_CORE")
 
     class Config:
         env_file = ".env"

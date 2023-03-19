@@ -1,4 +1,6 @@
 import socketio
+from socketio import AsyncRedisManager
+from socketio import AsyncServer
 
 from app.di.containers import Application
 from app.v1.namespace import NameSpaceV1

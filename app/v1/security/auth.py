@@ -20,4 +20,25 @@ class Security(HTTPClient):
         )
         if code != 200:
             raise UnauthorizedError
-        return BaseResponse[GetUserModel].parse_obj(response)
+
+        model = BaseResponse[GetUserModel].parse_obj(response)
+        model.result.jwt = token
+        return model
+
+    async def activity(
+        self,
+        token: str,
+        is_online: bool,
+        last_activity: str,
+
+    ):
+        url = f"{self.base_url}/api/v1/auth/me/activity"
+        headers = {"Authorization": token}
+
+        response, code = await self._request(
+            "PATCH",
+            url=url,
+            json={"is_online": is_online, "last_activity": last_activity},
+            headers=headers,
+        )
+        return response
